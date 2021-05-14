@@ -47,6 +47,15 @@ router.get('/search/:text', (req, res) => {
 
 router.get('/sort/:prop', (req, res) => {
 
+    Superheroi.find().sort(req.params.prop).exec((err, documents) => {
+        if (!err) {
+            res.json(documents);
+        }
+        else {
+            res.send("Error");
+        }
+    });
+
 });
 
 router.get('/vs/:idFirst/:idSecond', (req, res) => {
