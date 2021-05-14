@@ -171,6 +171,13 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
 
+    Superheroi.findByIdAndDelete(req.params.id, err => {
+        if (err) {
+            res.send("error");
+        }
+        res.send("ok");
+    })
+
 });
 
 module.exports = router;
