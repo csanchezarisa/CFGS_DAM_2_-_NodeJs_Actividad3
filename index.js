@@ -5,6 +5,8 @@ const superherois = require('./routes/superherois');
 
 mongoose.connect('mongodb://localhost/superherois', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
+app.use(express.json());
+
 app.use('/superheroes', superherois);
 
 app.all('*', (req, res) => {
