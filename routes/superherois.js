@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
             res.json(documents);
         }
         else {
-            res.send("Error");
+            res.json({respuesta: "error"});
         }
     });
 
@@ -22,7 +22,7 @@ router.get('/:id', (req, res) => {
             res.json(document);
         }
         else {
-            res.send("Error");
+            res.json({respuesta: "error"});
         }
     });
 
@@ -39,7 +39,7 @@ router.get('/search/:text', (req, res) => {
             res.json(documents);
         }
         else {
-            res.send("Error");
+            res.json({respuesta: "error"});
         }
     });
 
@@ -52,7 +52,7 @@ router.get('/sort/:prop', (req, res) => {
             res.json(documents);
         }
         else {
-            res.send("Error");
+            res.json({respuesta: "error"});
         }
     });
 
@@ -86,14 +86,14 @@ router.get('/vs/:idFirst/:idSecond', (req, res) => {
                     }
                 }
                 else {
-                    res.send("Error");
+                    res.json({respuesta: "error"});
                 }
 
             });
 
         }
         else {
-            res.send("Error");
+            res.json({respuesta: "error"});
         }
     });
 
@@ -118,7 +118,7 @@ router.post('/', (req, res) => {
 
     nouSuperheroi.save(err => {
         if (!err) {
-            res.send("ok");
+            res.json({respuesta: "ok"});
         }
         else {
             let errores = [];
@@ -153,7 +153,7 @@ router.put('/:id', (req, res) => {
 
     Superheroi.findByIdAndUpdate(req.params.id, dadesSuperheroi, {runValidators: true}, err => {
         if (!err) {
-			res.send("ok");
+			res.json({respuesta: "ok"});
 		} 
         else {
 			
@@ -173,9 +173,9 @@ router.delete('/:id', (req, res) => {
 
     Superheroi.findByIdAndDelete(req.params.id, err => {
         if (err) {
-            res.send("error");
+            res.json({respuesta: "error"});
         }
-        res.send("ok");
+        res.json({respuesta: "ok"});
     })
 
 });
