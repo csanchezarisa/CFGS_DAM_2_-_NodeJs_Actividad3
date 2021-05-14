@@ -29,6 +29,19 @@ router.get('/:id', (req, res) => {
 });
 
 router.get('/search/:text', (req, res) => {
+    
+    let filter = {
+        nom: new RegExp(req.params.text, 'i')
+    };
+
+    Superheroi.find(filter, (err, documents) => {
+        if (!err) {
+            res.json(documents);
+        }
+        else {
+            res.send("Error");
+        }
+    });
 
 });
 
