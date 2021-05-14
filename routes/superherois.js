@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
         else {
             res.send("Error");
         }
-    })
+    });
 
 });
 
@@ -59,6 +59,43 @@ router.get('/sort/:prop', (req, res) => {
 });
 
 router.get('/vs/:idFirst/:idSecond', (req, res) => {
+
+    Superheroi.findById(req.params.idFirst, (err, firstSuperheroe) => {
+        if (!err) {
+            
+            Superheroi.findById(req.params.idSecond, (err, secondSuperheroe) => {
+
+                if (!err) {
+
+                    let avgFirst = (firstSuperheroe.inteligencia + firstSuperheroe.forca + firstSuperheroe.velocitat + firstSuperheroe.resistencia + firstSuperheroe.poder + firstSuperheroe.habilitat + firstSuperheroe.pes) / 6;
+                    let avgSecond = (secondSuperheroe.inteligencia + secondSuperheroe.forca + secondSuperheroe.velocitat + secondSuperheroe.resistencia + secondSuperheroe.poder + secondSuperheroe.habilitat + secondSuperheroe.pes) / 6;
+
+                    if (avgFirst > avgSecond) {
+                        res.json(firstSuperheroe);
+                    }
+                    else if (avgSecond > avgFirst) {
+                        res.json(secondSuperheroe);
+                    }
+                    else {
+                        let response = {
+                            first: firstSuperheroe,
+                            second: secondSuperheroe
+                        };
+
+                        res.json(response);
+                    }
+                }
+                else {
+                    res.send("Error");
+                }
+
+            });
+
+        }
+        else {
+            res.send("Error");
+        }
+    });
 
 });
 
