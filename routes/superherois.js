@@ -136,6 +136,37 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
 
+    let dadesSuperheroi = {
+        nom: req.body.nom,
+        genere: req.body.genere,
+        raca: req.body.raca,
+        alcada: req.body.alcada,
+        pes: req.body.pes,
+        llocNaixement: req.body.llocNaixement,
+        inteligencia: req.body.inteligencia,
+        forca: req.body.forca,
+        velocitat: req.body.velocitat,
+        resistencia: req.body.resistencia,
+        poder: req.body.poder,
+        habilitat: req.body.habilitat
+    };
+
+    Superheroi.findByIdAndUpdate(req.params.id, dadesSuperheroi, {runValidators: true}, err => {
+        if (!err) {
+			res.send("ok");
+		} 
+        else {
+			
+			let errores = [];
+			let campos = Object.keys(err.errors);
+
+			for (let campo of campos) {
+				errores.push(err.errors[campo].message);
+			}
+
+			res.json(errores);
+		}
+    })
 });
 
 router.delete('/:id', (req, res) => {
